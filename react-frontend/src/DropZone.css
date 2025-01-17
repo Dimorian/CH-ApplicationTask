@@ -1,0 +1,26 @@
+.dropzone {
+  border: 2px dashed #89b7da;
+  padding: 20px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: inset 0px 0px 8px 0px #89b7dad3;
+  background: repeating-linear-gradient(
+    55deg,
+    #ffffff,
+    #ffffff 4px,
+    #89b7da31 4px,
+    #89b7da31 8px
+  );
+  height: 1.6em;
+  width: 500px;
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+.dropzone h3{
+  margin-top: -.43em;
+  color: #89b7dad3;
+  font-weight: bolder;
+  font-size: 3em;
+}
