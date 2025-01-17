@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import DropZone from './DropZone';
 import FileList from './FileList';
-import {FileTileProps} from './types.ts';
+import { FileTileProps } from './types.ts';
 import './App.css';
 
 const App: React.FC = () => {
@@ -10,22 +10,21 @@ const App: React.FC = () => {
   const [uploading, setUploading] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<
     FileTileProps[]
-    >([]);
+  >([]);
 
-    const handleFilesDrop = (files: File[]) => {
-      setSelectedFiles((prevFiles) => {
-        const mergedFiles = [...prevFiles, ...files].reduce<File[]>((acc, file) => {
-          if (!acc.find((f) => f.name === file.name)) {
-            acc.push(file);
-          }
-          return acc;
-        }, []);
-        return mergedFiles;
-      });
-    };
-    
+  const handleFilesDrop = (files: File[]) => {
+    setSelectedFiles((prevFiles) => {
+      const mergedFiles = [...prevFiles, ...files].reduce<File[]>((acc, file) => {
+        if (!acc.find((f) => f.name === file.name)) {
+          acc.push(file);
+        }
+        return acc;
+      }, []);
+      return mergedFiles;
+    });
+  };
 
-    const handleUpload = async () => {
+  const handleUpload = async () => {
     if (selectedFiles.length === 0) {
       return;
     }
@@ -40,15 +39,19 @@ const App: React.FC = () => {
     try {
       const response = await axios.post('http://localhost:5000/api/upload', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'multipart/form-data; charset=utf-8',
         },
       });
-      console.log("response:");
-      console.log(response.data.files);
+
+      //console.log("response:");
+      //console.log(response.data.files);
+
       setUploadedFiles(response.data.files);
+
     } catch (error: any) {
       console.error('Upload Error:', error.message);
       alert(`Upload Failed: ${error.response?.data?.message || error.message}`);
+
     } finally {
       setUploading(false);
     }
