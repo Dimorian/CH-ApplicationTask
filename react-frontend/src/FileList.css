@@ -1,8 +1,7 @@
-.file-list{
-    width: 500px;
-    display:flex;
-    flex-direction:column;
-    padding:2em 2em 0 2em;
-    margin-top: -2.5em;
+.file-list {
+    width: 31rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 2rem 0 2rem;
+    margin-top: -2.5rem;
 }
-
