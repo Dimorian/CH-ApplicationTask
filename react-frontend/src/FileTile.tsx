@@ -28,13 +28,22 @@ const FileTile: React.FC<FileTileProps> = ({ fileName, fileSize, text, isUploade
     element.click();
   };
 
+  const maxChars = 27;
+  const trimmedFileName = (fileName:string) => {
+    if (fileName.length > maxChars) {
+      return fileName.substring(0, maxChars) + ' ...';
+    } else {
+      return fileName;
+    }
+  }; 
+
   //console.log("isUploaded:" + isUploaded);
   //console.log("text:" + text);
 
   return (
     <li className={`file-tile ${isExpanded ? 'expanded' : ''} ${isActive ? '' : 'inactive'}`} onClick={handleToggle}>
       <div className="file-tile-header flex-space-between">
-        <h3>{isActive ? (isExpanded ? (<>&nbsp;▶  </>) : (<> ▼ </>)) : ''}{fileName}</h3>
+        <h3>{isActive ? (isExpanded ? (<>&nbsp;▶  </>) : (<> ▼ </>)) : ''}{trimmedFileName(fileName)}</h3>
         <div className="file-tile-header-info">
           <p>{isUploaded && ((text?.length || 0) + ' characters - ')}{fileSize} KB</p>
           {isActive && <CopyToClipboard text={text || ''}>
